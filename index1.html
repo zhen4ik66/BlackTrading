@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Black Trading — community access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: black;
+  font-family: 'Courier New', monospace;
+  color: #b6ffda;
+  overflow: hidden;
+}
+
+/* Matrix background */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Center card */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 30, 20, 0.85);
+  border-radius: 22px;
+  padding: 40px;
+  width: 520px;
+  max-width: 90%;  /* важно для телефонов */
+  text-align: center;
+  box-shadow: 0 0 45px rgba(0,255,170,.35);
+  backdrop-filter: blur(12px);
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 14px;
+}
+
+.green {
+  color: #00ff9c;
+}
+
+p {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+/* Logo */
+.logo {
+  width: 120px;
+  max-width: 50%;  /* уменьшаем на телефоне */
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 18px rgba(0,255,170,.5));
+}
+
+/* Button */
+.tg-button {
+  display: block;
+  padding: 16px;
+  background: linear-gradient(135deg, #00ff9c, #00c67a);
+  color: #003322;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 0 30px rgba(0,255,170,.55);
+  transition: all .25s ease;
+}
+
+.tg-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 45px rgba(0,255,170,.85);
+}
+
+/* Footer */
+.footer {
+  margin-top: 28px;
+  font-size: 12px;
+  opacity: .45;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+  .card {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  p {
+    font-size: 13px;
+  }
+  .tg-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="card">
+  <img src="logo.png" class="logo" alt="Black Trading">
+
+  <h1>ВАС ПРИВЕТСТВУЕТ <span class="green">BLACK TRADING</span></h1>
+
+  <p>
+    Чтобы попасть в наше трейдинг-комьюнити  
+    и получать торговые сигналы —  
+    нажмите кнопку ниже.
+  </p>
+
+  <a class="tg-button"
+     href="https://t.me/blackaitrading_bot?start=site"
+     target="_blank">
+     🚀 Перейти в комьюнити
+  </a>
+
+  <div class="footer">
+    © 2026 Black Trading
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01<>/{}[]$#@&*";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw() {
+  ctx.fillStyle = "rgba(0,0,0,0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff9c";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+      drops[i] = 0;
+
+    drops[i]++;
+  }
+}
+
+setInterval(draw, 35);
+
+window.onresize = () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+};
+</script>
+
+</body>
+</html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Black Trading — community access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,6 +34,7 @@ canvas {
   border-radius: 22px;
   padding: 40px;
   width: 520px;
+  max-width: 90%;  /* важно для телефонов */
   text-align: center;
   box-shadow: 0 0 45px rgba(0,255,170,.35);
   backdrop-filter: blur(12px);
@@ -51,11 +53,13 @@ p {
   font-size: 15px;
   opacity: 0.85;
   margin-bottom: 30px;
+  line-height: 1.4;
 }
 
 /* Logo */
 .logo {
   width: 120px;
+  max-width: 50%;  /* уменьшаем на телефоне */
   margin-bottom: 25px;
   filter: drop-shadow(0 0 18px rgba(0,255,170,.5));
 }
@@ -85,6 +89,23 @@ p {
   font-size: 12px;
   opacity: .45;
 }
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+  .card {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  p {
+    font-size: 13px;
+  }
+  .tg-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
 </style>
 </head>
 
@@ -93,7 +114,6 @@ p {
 <canvas id="matrix"></canvas>
 
 <div class="card">
-  <!-- Логотип активирован -->
   <img src="logo.png" class="logo" alt="Black Trading">
 
   <h1>ВАС ПРИВЕТСТВУЕТ <span class="green">BLACK TRADING</span></h1>
